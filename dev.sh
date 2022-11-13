@@ -1,0 +1,1 @@
+nodemon --watch '../**/*.go' -e go --signal SIGTERM --exec 'go' run .
