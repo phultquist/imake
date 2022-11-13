@@ -16,8 +16,7 @@ import (
 )
 
 type imageHandler struct {
-	mu    sync.Mutex // guards n
-	count int
+	mu sync.Mutex // guards n
 }
 
 func hash(s string) uint32 {
