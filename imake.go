@@ -27,7 +27,7 @@ func hash(s string) uint32 {
 
 func (handler *imageHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
-	imgUrl := "https://cdn.raster.app/raster/raster/k5Ov2Vn1pi?ixlib=js-3.6.0&s=bd19ef4b04ed05e37b36aef3b6067de2"
+	imgUrl := "https://cdn.raster.app/raster/raster/eMueOFL3Hw?ixlib=js-3.6.0&s=cc3998a09bd1b0d388497ae6148c38db"
 
 	handler.mu.Lock()
 
@@ -53,6 +53,7 @@ func (handler *imageHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.Handle("/new", new(imageHandler))
+	print("Listening on port 8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 

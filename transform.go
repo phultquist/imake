@@ -12,13 +12,16 @@ import (
 type Params struct {
 	brightness float64
 	contrast   float64
-	invert     float64
+	// TODO: should not be float64
+	invert float64
+	hue    float64
 }
 
 var defaultParams = Params{
 	brightness: 0,
 	contrast:   0,
 	invert:     0,
+	hue:        0,
 }
 
 func transform(image image.Image, query *http.Request) image.Image {
@@ -27,11 +30,13 @@ func transform(image image.Image, query *http.Request) image.Image {
 	brightness := parseQueryParamNum(query, "brightness", defaultParams.brightness)
 	contrast := parseQueryParamNum(query, "contrast", defaultParams.contrast)
 	invert := parseQueryParamNum(query, "invert", defaultParams.invert)
+	hue := parseQueryParamNum(query, "hue", defaultParams.hue)
 
 	params := Params{
 		brightness: brightness,
 		contrast:   contrast,
 		invert:     invert,
+		hue:        hue,
 	}
 
 	if params.invert != defaultParams.invert {
@@ -44,6 +49,10 @@ func transform(image image.Image, query *http.Request) image.Image {
 
 	if params.contrast != defaultParams.contrast {
 		final = adjust.Contrast(final, params.contrast)
+	}
+
+	if params.hue != defaultParams.hue {
+		final = adjust.Hue(final, int(params.hue))
 	}
 
 	return final
